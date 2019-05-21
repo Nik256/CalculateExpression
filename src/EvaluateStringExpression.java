@@ -10,18 +10,18 @@ public class EvaluateStringExpression {
 
         // Parsing
         for (int i = 0; i < tokens.length; i++) {
-            if (tokens[i] == ' ')
+            if (tokens[i] == ' ') {
                 continue;
+            }
             if (tokens[i] >= '0' && tokens[i] <= '9') {
                 StringBuffer sbuf = new StringBuffer();
-                while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
+                while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9') {
                     sbuf.append(tokens[i++]);
-
+                }
                 values.push(Integer.parseInt(sbuf.toString()));
-            } else if (tokens[i] == '(')
+            } else if (tokens[i] == '(') {
                 operators.push(tokens[i]);
-
-            else if (tokens[i] == ')') {
+            } else if (tokens[i] == ')') {
                 if (operators.empty()) {
                     throw new RuntimeException("Mismatches parentheses");
                 }
@@ -31,9 +31,9 @@ public class EvaluateStringExpression {
                 operators.pop();
             } else if (tokens[i] == '+' || tokens[i] == '-' ||
                     tokens[i] == '*' || tokens[i] == '/') {
-                while (!operators.empty() && hasPrecedence(tokens[i], operators.peek()))
+                while (!operators.empty() && hasPrecedence(tokens[i], operators.peek())) {
                     values.push(applyOperator(operators.pop(), values.pop(), values.pop()));
-
+                }
                 operators.push(tokens[i]);
             } else {
                 throw new UnsupportedOperationException("Wrong operator: " + tokens[i]);
@@ -53,15 +53,14 @@ public class EvaluateStringExpression {
     }
 
     public boolean hasPrecedence(char op1, char op2) {
-        if (op2 == '(' || op2 == ')')
+        if ((op2 == '(' || op2 == ')') ||
+                (op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-')) {
             return false;
-        if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-'))
-            return false;
-        else
+        } else {
             return true;
+        }
     }
-
-
+    
     public int applyOperator(char op, int b, int a) {
         switch (op) {
             case '+':
