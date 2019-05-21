@@ -14,11 +14,11 @@ public class EvaluateStringExpression {
                 continue;
             }
             if (tokens[i] >= '0' && tokens[i] <= '9') {
-                StringBuffer sbuf = new StringBuffer();
+                StringBuilder strBuilder = new StringBuilder();
                 while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9') {
-                    sbuf.append(tokens[i++]);
+                    strBuilder.append(tokens[i++]);
                 }
-                values.push(Integer.parseInt(sbuf.toString()));
+                values.push(Integer.parseInt(strBuilder.toString()));
             } else if (tokens[i] == '(') {
                 operators.push(tokens[i]);
             } else if (tokens[i] == ')') {
@@ -52,16 +52,12 @@ public class EvaluateStringExpression {
         return values.pop();
     }
 
-    public boolean hasPrecedence(char op1, char op2) {
-        if ((op2 == '(' || op2 == ')') ||
-                (op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-')) {
-            return false;
-        } else {
-            return true;
-        }
+    private boolean hasPrecedence(char op1, char op2) {
+        return (op2 != '(' && op2 != ')') &&
+                ((op1 != '*' && op1 != '/') || (op2 != '+' && op2 != '-'));
     }
-    
-    public int applyOperator(char op, int b, int a) {
+
+    private int applyOperator(char op, int b, int a) {
         switch (op) {
             case '+':
                 return a + b;
