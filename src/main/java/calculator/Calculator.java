@@ -1,6 +1,8 @@
+package calculator;
+
 import java.util.Stack;
 
-public class EvaluateStringExpression {
+public class Calculator {
 
     public int evaluate(String expression) {
         char[] tokens = expression.toCharArray();
@@ -41,7 +43,7 @@ public class EvaluateStringExpression {
         }
 
         // Entire expression has been parsed at this point, apply remaining
-        // ops to remaining values
+        // operators to remaining values
         while (!operators.empty()) {
             if (operators.peek() == '(') {
                 throw new RuntimeException("Mismatches parentheses");
