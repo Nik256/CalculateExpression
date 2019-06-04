@@ -6,7 +6,7 @@
 
     <groupId>homework</groupId>
     <artifactId>CalculateExpression</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
     <build>
         <plugins>
             <plugin>
@@ -19,6 +19,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
