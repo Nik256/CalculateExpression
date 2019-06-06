@@ -1,15 +1,14 @@
-package calculator;
+package com.epam.calc;
 
 import java.util.Stack;
 
 public class Calculator {
 
-    public int evaluate(String expression) {
+    public static int calculate(String expression) {
         char[] tokens = expression.toCharArray();
 
         Stack<Integer> values = new Stack<>();
         Stack<Character> operators = new Stack<>();
-        //ertert
         // Parsing
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i] == ' ') {
@@ -54,12 +53,12 @@ public class Calculator {
         return values.pop();
     }
 
-    private boolean hasPrecedence(char op1, char op2) {
+    private static boolean hasPrecedence(char op1, char op2) {
         return (op2 != '(' && op2 != ')') &&
                 ((op1 != '*' && op1 != '/') || (op2 != '+' && op2 != '-'));
     }
 
-    private int applyOperator(char op, int b, int a) {
+    private static int applyOperator(char op, int b, int a) {
         switch (op) {
             case '+':
                 return a + b;
@@ -69,7 +68,7 @@ public class Calculator {
                 return a * b;
             case '/':
                 if (b == 0)
-                    throw new UnsupportedOperationException("Cannot divide by zero");
+                    throw new IllegalArgumentException("Cannot divide by zero");
                 return a / b;
         }
         return 0;
