@@ -11,36 +11,37 @@ public class CalculatorNegativeTest {
 
     @Test
     void divisionByZeroShouldThrowIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Calculator.calculate("2 / 0");
-        });
+        assertThrows(IllegalArgumentException.class, () ->
+                Calculator.calculate("2 / 0"));
     }
 
     @Test
     void calculationOfEmptyExpressionShouldThrowEmptyStackException() {
-        assertThrows(EmptyStackException.class, () -> {
-            Calculator.calculate("");
-        });
+        assertThrows(EmptyStackException.class, () ->
+                Calculator.calculate(""));
     }
 
     @Test
     void calculationOfExpressionWithUnsupportedCharsShouldThrowUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            Calculator.calculate("a + b");
-        });
+        assertThrows(UnsupportedOperationException.class, () ->
+                Calculator.calculate("a + b"));
     }
 
     @Test
     void calculationOfExpressionWithFewOperatorsInARowShouldThrowEmptyStackException() {
-        assertThrows(EmptyStackException.class, () -> {
-            Calculator.calculate("1 + + 2");
-        });
+        assertThrows(EmptyStackException.class, () ->
+                Calculator.calculate("1 + + 2"));
     }
 
     @Test
-    void calculationOfExpressionWithWrongNumberOfParenthesesShouldThrowRuntimeException() {
-        assertThrows(RuntimeException.class, () -> {
-            Calculator.calculate("( 1 + 2 ) (");
-        });
+    void calculationOfExpressionWithWrongNumberOfLeftParenthesesShouldThrowRuntimeException() {
+        assertThrows(RuntimeException.class, () ->
+                Calculator.calculate("( 1 + 2 ) ("));
+    }
+
+    @Test
+    void calculationOfExpressionWithWrongNumberOfRightParenthesesShouldThrowRuntimeException() {
+        assertThrows(RuntimeException.class, () ->
+                Calculator.calculate("( 1 + 2 ) )"));
     }
 }
