@@ -7,7 +7,7 @@ import java.util.EmptyStackException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class CalculatorNegativeTest {
+class CalculatorNegativeTest {
 
     @Test
     void divisionByZeroShouldThrowIllegalArgumentException() {
